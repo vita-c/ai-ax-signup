@@ -1,64 +1,28 @@
 <title>AI·AX 양성과정 수강신청</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap">
 
 <style>
-/* ─── Design tokens ─────────────────────────────────────────── */
-/* Layout: full-width hero band → 2-col feature grid → 4-module accordion cards → CTA */
 :root {
-  --bg: #f8f7f4;
-  --bg2: #eeeae3;
-  --fg: #1a1714;
-  --fg2: #5a5450;
-  --fg3: #8a8480;
-  --accent: #c0562a;         /* warm terracotta — avoided? no: used as the *only* pop on deep ink */
-  --accent-soft: #f2e4dc;
-  --ink: #1c2b3a;            /* deep teal-navy for hero band */
-  --ink2: #2c3f52;
-  --gold: #b5922a;
-  --border: rgba(26,23,20,.12);
-  --card-bg: #ffffff;
-
-  --f-display: 'Noto Serif KR', 'Batang', serif;
+  --bg: #f5f7ff;
+  --bg2: #eef1fb;
+  --bg3: #ffffff;
+  --fg: #0f172a;
+  --fg2: #475569;
+  --fg3: #94a3b8;
+  --accent: #2563eb;
+  --accent2: #7c3aed;
+  --accent-soft: #dbeafe;
+  --accent2-soft: #ede9fe;
+  --green: #059669;
+  --green-soft: #d1fae5;
+  --border: rgba(15,23,42,.09);
+  --shadow: 0 2px 16px rgba(37,99,235,.10);
+  --shadow-lg: 0 8px 40px rgba(37,99,235,.14);
   --f-body: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
-
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #141210;
-    --bg2: #1e1b18;
-    --fg: #f0ede8;
-    --fg2: #a09890;
-    --fg3: #706860;
-    --accent: #d4704a;
-    --accent-soft: #2a1e18;
-    --ink: #0d1b28;
-    --ink2: #162436;
-    --gold: #c8a840;
-    --border: rgba(240,237,232,.1);
-    --card-bg: #1e1b18;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #141210;
-  --bg2: #1e1b18;
-  --fg: #f0ede8;
-  --fg2: #a09890;
-  --fg3: #706860;
-  --accent: #d4704a;
-  --accent-soft: #2a1e18;
-  --ink: #0d1b28;
-  --ink2: #162436;
-  --gold: #c8a840;
-  --border: rgba(240,237,232,.1);
-  --card-bg: #1e1b18;
-  color-scheme: dark;
-}
-
-/* ─── Reset & base ──────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   background: var(--bg);
   color: var(--fg);
@@ -70,45 +34,30 @@ body {
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
-/* ─── Utilities ─────────────────────────────────────────────── */
 .wrap {
   max-width: 1100px;
   margin: 0 auto;
-  padding-left: max(20px, env(safe-area-inset-left, 0px));
-  padding-right: max(20px, env(safe-area-inset-right, 0px));
-}
-.label {
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--fg3);
-}
-.accent-line {
-  display: inline-block;
-  width: 2.5rem;
-  height: 3px;
-  background: var(--accent);
-  border-radius: 2px;
-  vertical-align: middle;
-  margin-right: .6rem;
+  padding-left: max(20px, env(safe-area-inset-left,0px));
+  padding-right: max(20px, env(safe-area-inset-right,0px));
 }
 
-/* ─── Top nav ───────────────────────────────────────────────── */
+/* ─── NAV ─────────────────────────────────────────────── */
 .nav {
   position: sticky;
-  top: env(safe-area-inset-top, 0px);
-  z-index: 50;
-  background: var(--ink);
-  padding-block: .9rem;
+  top: env(safe-area-inset-top,0px);
+  z-index: 100;
+  background: rgba(255,255,255,.9);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding-block: .85rem;
 }
 body::before {
   content: "";
   position: fixed;
   inset: 0 0 auto;
-  height: env(safe-area-inset-top, 0px);
-  z-index: 60;
-  background: var(--ink);
+  height: env(safe-area-inset-top,0px);
+  z-index: 110;
+  background: #fff;
 }
 .nav .wrap {
   display: flex;
@@ -116,584 +65,601 @@ body::before {
   justify-content: space-between;
   gap: 1rem;
 }
-.nav-brand {
-  color: #ffffff;
-  font-size: .78rem;
-  font-weight: 500;
-  opacity: .85;
-  line-height: 1.4;
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
 }
-.nav-brand strong { display: block; font-weight: 700; font-size: .88rem; opacity: 1; color: #fff; }
+.nav-logo-badge {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 700;
+  padding: .28rem .6rem;
+  border-radius: .4rem;
+  letter-spacing: .04em;
+}
+.nav-brand-text {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--fg);
+  line-height: 1.3;
+}
+.nav-brand-text span { color: var(--fg2); font-weight: 400; font-size: .75rem; }
 .nav-cta {
   display: inline-flex;
   align-items: center;
   gap: .4rem;
   background: var(--accent);
   color: #fff;
-  font-size: .82rem;
+  font-size: .84rem;
   font-weight: 700;
-  padding: .5rem 1.1rem;
-  border-radius: 3rem;
+  padding: .55rem 1.25rem;
+  border-radius: 2rem;
+  border: none;
+  cursor: pointer;
+  transition: background .18s, transform .12s;
   white-space: nowrap;
-  transition: background .18s;
 }
-.nav-cta:hover { background: #a84520; }
+.nav-cta:hover { background: #1d4ed8; transform: translateY(-1px); }
 
-/* ─── Hero ──────────────────────────────────────────────────── */
+/* ─── HERO ─────────────────────────────────────────────── */
 .hero {
-  background: var(--ink);
-  padding-block: 5rem 4rem;
+  background: linear-gradient(135deg, #1e3a8a 0%, #312e81 60%, #4c1d95 100%);
+  padding-block: 4.5rem 3.5rem;
   position: relative;
   overflow: hidden;
 }
-.hero::after {
+.hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(192,86,42,.18) 0%, transparent 60%),
-              radial-gradient(ellipse 50% 80% at 0% 100%, rgba(181,146,42,.08) 0%, transparent 60%);
+  background:
+    radial-gradient(ellipse 60% 70% at 85% 50%, rgba(124,58,237,.25) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 15% 90%, rgba(37,99,235,.2) 0%, transparent 60%);
   pointer-events: none;
 }
-.hero-eyebrow {
-  display: flex;
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 3rem;
   align-items: center;
-  gap: .8rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.8rem;
-}
-.hero-badge {
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: .3rem .8rem;
-  border-radius: 2rem;
-  border: 1px solid rgba(255,255,255,.22);
-  color: rgba(255,255,255,.75);
-}
-.hero-badge.hot { background: rgba(192,86,42,.35); border-color: rgba(192,86,42,.5); color: #f0b090; }
-.hero-badge.free { background: rgba(34,139,34,.3); border-color: rgba(34,139,34,.5); color: #7edb7e; font-weight: 700; }
-.hero h1 {
-  font-family: var(--f-display);
-  font-size: clamp(2.2rem, 5vw, 3.6rem);
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1.22;
-  text-wrap: balance;
-  margin-bottom: 1.2rem;
   position: relative;
   z-index: 1;
+}
+@media (max-width: 860px) { .hero-inner { grid-template-columns: 1fr; } }
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: 1.4rem;
+}
+.badge {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  padding: .28rem .75rem;
+  border-radius: 2rem;
+  border: 1px solid rgba(255,255,255,.2);
+  color: rgba(255,255,255,.8);
+}
+.badge-free {
+  background: rgba(5,150,105,.3);
+  border-color: rgba(5,150,105,.5);
+  color: #6ee7b7;
+}
+.badge-hot {
+  background: rgba(239,68,68,.25);
+  border-color: rgba(239,68,68,.45);
+  color: #fca5a5;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+  text-wrap: balance;
+  margin-bottom: 1.1rem;
 }
 .hero h1 em {
   font-style: normal;
-  color: #f0a070;
+  background: linear-gradient(90deg, #a5f3fc, #c4b5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.hero-sub {
-  font-size: 1.05rem;
-  color: rgba(255,255,255,.68);
-  max-width: 560px;
-  line-height: 1.75;
-  margin-bottom: 2.4rem;
-  position: relative;
-  z-index: 1;
+.hero-desc {
+  font-size: 1rem;
+  color: rgba(255,255,255,.72);
+  max-width: 520px;
+  line-height: 1.8;
+  margin-bottom: 2rem;
 }
-.hero-stats {
+.hero-btns {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem 2rem;
-  margin-bottom: 2.8rem;
-  position: relative;
-  z-index: 1;
+  gap: .75rem;
 }
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: .15rem;
-}
-.stat-n {
-  font-family: var(--f-display);
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: #fff;
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-}
-.stat-n span { font-size: 1rem; font-weight: 500; opacity: .75; margin-left: .1rem; }
-.stat-l {
-  font-size: .72rem;
-  color: rgba(255,255,255,.5);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .8rem;
-  position: relative;
-  z-index: 1;
-}
-.btn-primary {
+.btn-hero {
   display: inline-flex;
   align-items: center;
-  gap: .5rem;
-  background: var(--accent);
-  color: #fff;
-  font-size: 1rem;
+  gap: .45rem;
+  background: #fff;
+  color: var(--accent);
+  font-size: .96rem;
   font-weight: 700;
-  padding: .85rem 2rem;
-  border-radius: 3rem;
-  transition: background .18s, transform .12s;
+  padding: .85rem 1.9rem;
+  border-radius: 2rem;
+  border: none;
   cursor: pointer;
+  transition: background .15s, transform .12s;
+  box-shadow: 0 4px 20px rgba(0,0,0,.15);
 }
-.btn-primary:hover { background: #a84520; transform: translateY(-1px); }
-.btn-secondary {
+.btn-hero:hover { background: #f0f4ff; transform: translateY(-1px); }
+.btn-hero-ghost {
   display: inline-flex;
   align-items: center;
-  gap: .5rem;
+  gap: .45rem;
   background: transparent;
-  color: rgba(255,255,255,.8);
-  font-size: 1rem;
-  font-weight: 500;
+  color: rgba(255,255,255,.85);
+  font-size: .96rem;
+  font-weight: 600;
   padding: .85rem 1.6rem;
-  border-radius: 3rem;
-  border: 1px solid rgba(255,255,255,.25);
-  transition: border-color .18s, color .18s;
+  border-radius: 2rem;
+  border: 1.5px solid rgba(255,255,255,.3);
+  transition: border-color .15s;
 }
-.btn-secondary:hover { border-color: rgba(255,255,255,.5); color: #fff; }
+.btn-hero-ghost:hover { border-color: rgba(255,255,255,.6); color: #fff; }
 
-/* ─── Intro strip ───────────────────────────────────────────── */
-.intro {
-  background: var(--accent);
-  padding-block: 1.3rem;
-}
-.intro .wrap {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: .6rem 2rem;
-}
-.intro-text {
-  color: #fff;
-  font-size: .9rem;
-  font-weight: 500;
-}
-.intro-text strong { font-weight: 700; }
-
-/* ─── Section base ──────────────────────────────────────────── */
-section { padding-block: 4.5rem; }
-.section-head {
-  margin-bottom: 2.8rem;
-}
-.section-head h2 {
-  font-family: var(--f-display);
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 700;
-  color: var(--fg);
-  line-height: 1.3;
-  text-wrap: balance;
-  margin-top: .6rem;
-}
-
-/* ─── About 3-col ───────────────────────────────────────────── */
-.about { background: var(--bg); }
-.about-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-@media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; } }
-.about-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+/* 히어로 오른쪽 카드 */
+.hero-card {
+  background: rgba(255,255,255,.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 20px;
   padding: 1.8rem;
 }
-.about-icon {
-  width: 2.6rem;
-  height: 2.6rem;
-  border-radius: 8px;
-  background: var(--accent-soft);
+@media (max-width: 860px) { .hero-card { display: none; } }
+.hero-card-title {
+  font-size: .75rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.5);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+.hstat {
+  background: rgba(255,255,255,.1);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+.hstat-n {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: .2rem;
+}
+.hstat-n sup { font-size: .9rem; }
+.hstat-l { font-size: .7rem; color: rgba(255,255,255,.55); letter-spacing: .06em; }
+.hero-pill-list {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.hero-pill {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+  gap: .6rem;
+  background: rgba(255,255,255,.08);
+  border-radius: 10px;
+  padding: .55rem .9rem;
+  font-size: .82rem;
+  color: rgba(255,255,255,.82);
 }
-.about-card h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: .5rem;
-  color: var(--fg);
-}
-.about-card p {
-  font-size: .88rem;
-  color: var(--fg2);
-  line-height: 1.75;
+.hero-pill-dot {
+  width: .45rem;
+  height: .45rem;
+  border-radius: 50%;
+  background: #6ee7b7;
+  flex-shrink: 0;
 }
 
-/* ─── Who is this for ───────────────────────────────────────── */
-.who { background: var(--bg2); }
-.who-grid {
+/* ─── 특징 4-카드 ─────────────────────────────────────── */
+.features {
+  padding-block: 3rem;
+  background: #fff;
+}
+.feat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(4,1fr);
   gap: 1rem;
 }
-.who-item {
-  display: flex;
-  align-items: flex-start;
-  gap: .8rem;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.2rem 1.4rem;
-}
-.who-dot {
-  width: .5rem;
-  height: .5rem;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-  margin-top: .55rem;
-}
-.who-item p {
-  font-size: .9rem;
-  color: var(--fg);
-  font-weight: 500;
-  line-height: 1.55;
-}
-
-/* ─── Modules ───────────────────────────────────────────────── */
-.modules { background: var(--bg); }
-.module-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-.module-card {
-  background: var(--card-bg);
+@media (max-width: 860px) { .feat-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 480px) { .feat-grid { grid-template-columns: 1fr; } }
+.feat-card {
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 14px;
-  overflow: hidden;
+  padding: 1.4rem;
+  transition: box-shadow .2s, transform .15s;
 }
-.module-header {
+.feat-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.feat-icon {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 10px;
   display: flex;
-  align-items: stretch;
-  gap: 0;
-}
-.module-num {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1.4rem 1.4rem;
-  min-width: 72px;
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: .7rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  gap: .2rem;
-}
-.module-num .num {
-  font-size: 2rem;
-  letter-spacing: 0;
-  line-height: 1;
-}
-.m1 .module-num { background: #1c3a5e; color: #90c0ee; }
-.m2 .module-num { background: #1e3d30; color: #80c8a0; }
-.m3 .module-num { background: #3d1e35; color: #d890c8; }
-.m4 .module-num { background: #3d2a10; color: #d0a050; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .m1 .module-num { background: #0d2035; }
-  :root:not([data-theme="light"]) .m2 .module-num { background: #0d2018; }
-  :root:not([data-theme="light"]) .m3 .module-num { background: #200d1c; }
-  :root:not([data-theme="light"]) .m4 .module-num { background: #201408; }
-}
-:root[data-theme="dark"] .m1 .module-num { background: #0d2035; }
-:root[data-theme="dark"] .m2 .module-num { background: #0d2018; }
-:root[data-theme="dark"] .m3 .module-num { background: #200d1c; }
-:root[data-theme="dark"] .m4 .module-num { background: #201408; }
-.module-info {
-  flex: 1;
-  padding: 1.4rem 1.6rem;
-  min-width: 0;
-}
-.module-meta {
-  display: flex;
-  align-items: center;
-  gap: .8rem;
-  flex-wrap: wrap;
-  margin-bottom: .5rem;
-}
-.module-tag {
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  padding: .2rem .6rem;
-  border-radius: 2rem;
-  background: var(--bg2);
-  color: var(--fg2);
-}
-.module-hours {
-  font-size: .78rem;
-  color: var(--fg3);
-  font-variant-numeric: tabular-nums;
-}
-.module-info h3 {
-  font-size: 1.06rem;
-  font-weight: 700;
-  color: var(--fg);
-  margin-bottom: .5rem;
-}
-.module-desc {
-  font-size: .88rem;
-  color: var(--fg2);
-  line-height: 1.7;
+  font-size: 1.3rem;
   margin-bottom: .9rem;
 }
-.module-topics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem;
+.fi-blue { background: var(--accent-soft); }
+.fi-purple { background: var(--accent2-soft); }
+.fi-green { background: var(--green-soft); }
+.fi-orange { background: #fff7ed; }
+.feat-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: .4rem; }
+.feat-card p { font-size: .82rem; color: var(--fg2); line-height: 1.65; }
+
+/* ─── SECTION BASE ────────────────────────────────────── */
+section { padding-block: 5rem; }
+.sec-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: .3rem .75rem;
+  border-radius: 2rem;
+  margin-bottom: 1rem;
 }
-.topic-chip {
-  font-size: .76rem;
-  padding: .2rem .65rem;
+.sec-head h2 {
+  font-size: clamp(1.5rem,3vw,2.2rem);
+  font-weight: 800;
+  line-height: 1.25;
+  text-wrap: balance;
+  margin-bottom: .8rem;
+}
+.sec-head p {
+  font-size: 1rem;
+  color: var(--fg2);
+  line-height: 1.75;
+  max-width: 560px;
+}
+
+/* ─── WHO ─────────────────────────────────────────────── */
+.who { background: var(--bg); }
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+  gap: .9rem;
+  margin-top: 2.5rem;
+}
+.who-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.3rem 1.4rem;
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
+  transition: box-shadow .2s;
+}
+.who-card:hover { box-shadow: var(--shadow); }
+.who-num {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.who-card p { font-size: .9rem; color: var(--fg); line-height: 1.6; font-weight: 500; }
+
+/* ─── MODULES ─────────────────────────────────────────── */
+.modules-sec { background: #fff; }
+.module-tabs {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.mtab {
+  padding: .5rem 1.1rem;
+  border-radius: 2rem;
+  border: 1.5px solid var(--border);
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--fg2);
+  transition: all .15s;
+  font-family: var(--f-body);
+}
+.mtab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.mcard-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 1.2rem;
+}
+@media (max-width: 640px) { .mcard-grid { grid-template-columns: 1fr; } }
+.mcard {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+.mcard-head {
+  padding: 1.3rem 1.4rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.mcard-num-badge {
+  flex-shrink: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #fff;
+}
+.mn1 { background: linear-gradient(135deg,#2563eb,#6d28d9); }
+.mn2 { background: linear-gradient(135deg,#059669,#0891b2); }
+.mn3 { background: linear-gradient(135deg,#7c3aed,#db2777); }
+.mn4 { background: linear-gradient(135deg,#d97706,#dc2626); }
+.mcard-meta { flex: 1; min-width: 0; }
+.mcard-tag {
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: .2rem .6rem;
+  border-radius: 2rem;
+  display: inline-block;
+  margin-bottom: .4rem;
+}
+.mcard-meta h3 { font-size: 1rem; font-weight: 700; color: var(--fg); }
+.mcard-body {
+  padding: 0 1.4rem 1.3rem;
+}
+.mcard-desc { font-size: .85rem; color: var(--fg2); line-height: 1.7; margin-bottom: .8rem; }
+.chip-row { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: .8rem; }
+.chip {
+  font-size: .72rem;
+  padding: .18rem .6rem;
   border-radius: 2rem;
   border: 1px solid var(--border);
   color: var(--fg2);
   background: var(--bg);
 }
-.module-outcome {
-  margin-top: .9rem;
-  padding: .7rem .9rem;
+.mcard-result {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
   background: var(--bg2);
   border-radius: 8px;
-  font-size: .82rem;
+  padding: .6rem .9rem;
+  font-size: .8rem;
   color: var(--fg2);
 }
-.module-outcome strong { color: var(--accent); font-weight: 700; }
+.mcard-result strong { color: var(--accent); }
 
-/* ─── Outcomes ──────────────────────────────────────────────── */
-.outcomes { background: var(--ink); padding-block: 4.5rem; }
-.outcomes .section-head h2 { color: #fff; }
-.outcomes .label { color: rgba(255,255,255,.45); }
+/* ─── OUTCOMES ─────────────────────────────────────────── */
+.outcomes-sec {
+  background: linear-gradient(135deg,#1e3a8a,#4c1d95);
+  padding-block: 5rem;
+}
+.outcomes-sec .sec-label { background: rgba(255,255,255,.12); color: rgba(255,255,255,.8); }
+.outcomes-sec .sec-head h2 { color: #fff; }
+.outcomes-sec .sec-head p { color: rgba(255,255,255,.65); }
 .outcomes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
   gap: 1rem;
+  margin-top: 2.5rem;
 }
-.outcome-card {
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.1);
+.oc {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: background .2s;
+}
+.oc:hover { background: rgba(255,255,255,.13); }
+.oc-icon {
+  width: 2.8rem;
+  height: 2.8rem;
   border-radius: 12px;
-  padding: 1.6rem;
+  background: rgba(255,255,255,.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: .9rem;
 }
-.outcome-icon { font-size: 1.6rem; margin-bottom: .8rem; }
-.outcome-card h3 {
-  font-size: .96rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: .5rem;
-}
-.outcome-card p {
-  font-size: .84rem;
-  color: rgba(255,255,255,.6);
-  line-height: 1.7;
-}
+.oc h3 { font-size: .96rem; font-weight: 700; color: #fff; margin-bottom: .4rem; }
+.oc p { font-size: .82rem; color: rgba(255,255,255,.62); line-height: 1.7; }
 
-/* ─── Instructors ───────────────────────────────────────────── */
-.instructors { background: var(--bg2); }
-.inst-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+/* ─── READY ─────────────────────────────────────────────── */
+.ready-sec { background: var(--bg); }
+.ready-banner {
+  background: linear-gradient(135deg,var(--accent),var(--accent2));
+  border-radius: 20px;
+  padding: 2.5rem;
+  color: #fff;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
-.inst-card {
-  background: var(--card-bg);
+.ready-banner-text h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: .4rem; }
+.ready-banner-text p { font-size: .9rem; opacity: .82; line-height: 1.65; }
+.ready-banner-emoji { font-size: 3rem; flex-shrink: 0; }
+.ready-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(270px,1fr));
+  gap: .9rem;
+}
+.rcard {
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 1.4rem;
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  transition: box-shadow .18s;
 }
-.inst-avatar {
+.rcard:hover { box-shadow: var(--shadow); }
+.rcard-check {
+  flex-shrink: 0;
+  width: 1.7rem;
+  height: 1.7rem;
+  background: linear-gradient(135deg,var(--accent),var(--accent2));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 700;
+}
+.rcard p { font-size: .9rem; color: var(--fg); font-weight: 500; line-height: 1.5; }
+.rcard-highlight { border-color: var(--accent); background: var(--accent-soft); }
+
+/* ─── INSTRUCTORS ──────────────────────────────────────── */
+.inst-sec { background: #fff; }
+.inst-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(190px,1fr));
+  gap: .9rem;
+  margin-top: 2.5rem;
+}
+.inst-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.3rem;
+  transition: box-shadow .2s;
+}
+.inst-card:hover { box-shadow: var(--shadow); }
+.inst-av {
   width: 2.8rem;
   height: 2.8rem;
   border-radius: 50%;
-  background: var(--accent-soft);
+  background: linear-gradient(135deg,var(--accent),var(--accent2));
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--accent);
   margin-bottom: .9rem;
 }
-.inst-card h3 {
-  font-size: .96rem;
-  font-weight: 700;
-  margin-bottom: .2rem;
-}
-.inst-card .inst-role {
-  font-size: .78rem;
-  color: var(--fg2);
-  line-height: 1.5;
-  margin-bottom: .5rem;
-}
-.inst-qual {
-  font-size: .72rem;
-  color: var(--fg3);
-  line-height: 1.5;
-}
+.inst-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: .2rem; }
+.inst-role { font-size: .78rem; color: var(--fg2); line-height: 1.5; margin-bottom: .4rem; }
+.inst-qual { font-size: .72rem; color: var(--fg3); line-height: 1.55; }
 
-/* ─── Ready section ─────────────────────────────────────────── */
-.ready-section { background: var(--bg2); }
-.ready-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-  margin-top: 2.5rem;
-}
-.ready-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.2rem 1.4rem;
-  font-size: 1rem;
-  color: var(--fg);
-  transition: box-shadow .2s;
-}
-.ready-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
-.ready-card--highlight {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-}
-.ready-check {
-  flex-shrink: 0;
-  width: 1.8rem;
-  height: 1.8rem;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: .85rem;
-  font-weight: 700;
-}
-.ready-cta-text {
-  margin-top: 2rem;
-  text-align: center;
-  color: var(--fg2);
-  font-size: 1rem;
-}
-
-/* ─── Follow-up section ─────────────────────────────────────── */
-.followup-section { background: var(--ink); }
-.followup-section .section-head h2 { color: #fff; }
-.followup-section .label { color: var(--gold); }
-.followup-section .accent-line { background: var(--gold); }
-.followup-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 1.2rem;
-  margin-top: 2.5rem;
-}
-.followup-card {
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 14px;
-  padding: 1.6rem 1.4rem;
-  transition: background .2s;
-}
-.followup-card:hover { background: rgba(255,255,255,.1); }
-.followup-icon {
-  font-size: 2rem;
-  margin-bottom: .8rem;
-}
-.followup-card h3 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: .5rem;
-}
-.followup-card p {
-  font-size: .92rem;
-  color: rgba(255,255,255,.65);
-  line-height: 1.6;
-}
-.followup-badge {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-top: 2.2rem;
-  background: rgba(181,146,42,.15);
-  border: 1px solid rgba(181,146,42,.35);
-  border-radius: 12px;
-  padding: 1.2rem 1.4rem;
-  color: rgba(255,255,255,.85);
-  font-size: .95rem;
-  line-height: 1.6;
-}
-.followup-badge span { font-size: 1.4rem; flex-shrink: 0; }
-.followup-badge strong { color: var(--gold); }
-
-/* ─── CTA ───────────────────────────────────────────────────── */
-.cta-section {
-  background: var(--bg);
+/* ─── FOLLOWUP ─────────────────────────────────────────── */
+.followup-sec {
+  background: linear-gradient(135deg,#0f172a,#1e1b4b);
   padding-block: 5rem;
 }
-.cta-box {
-  background: var(--ink);
-  border-radius: 20px;
+.followup-sec .sec-label { background: rgba(167,139,250,.18); color: #c4b5fd; }
+.followup-sec .sec-head h2 { color: #fff; }
+.followup-sec .sec-head p { color: rgba(255,255,255,.6); }
+.followup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.fcard {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition: background .18s;
+}
+.fcard:hover { background: rgba(255,255,255,.1); }
+.fcard-icon { font-size: 1.8rem; margin-bottom: .7rem; }
+.fcard h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: .4rem; }
+.fcard p { font-size: .84rem; color: rgba(255,255,255,.6); line-height: 1.65; }
+.followup-note {
+  margin-top: 2rem;
+  background: rgba(167,139,250,.12);
+  border: 1px solid rgba(167,139,250,.3);
+  border-radius: 12px;
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  font-size: .9rem;
+  color: rgba(255,255,255,.8);
+  line-height: 1.6;
+}
+.followup-note strong { color: #c4b5fd; }
+
+/* ─── CTA ──────────────────────────────────────────────── */
+.cta-sec { background: var(--bg); padding-block: 5rem; }
+.cta-inner {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 24px;
   padding: 3.5rem 2.5rem;
   text-align: center;
+  box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
 }
-.cta-box::before {
+.cta-inner::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(192,86,42,.2) 0%, transparent 70%);
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 400px; height: 200px;
+  background: radial-gradient(ellipse,rgba(37,99,235,.1) 0%,transparent 70%);
   pointer-events: none;
 }
-.cta-box h2 {
-  font-family: var(--f-display);
-  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-  font-weight: 700;
-  color: #fff;
+.cta-inner h2 {
+  font-size: clamp(1.5rem,3.5vw,2.2rem);
+  font-weight: 800;
   text-wrap: balance;
   margin-bottom: .8rem;
   position: relative;
-  z-index: 1;
 }
-.cta-box p {
-  font-size: .96rem;
-  color: rgba(255,255,255,.65);
-  max-width: 500px;
-  margin: 0 auto 1rem;
-  line-height: 1.75;
-  position: relative;
-  z-index: 1;
-}
-.cta-contact {
-  font-size: .85rem;
-  color: rgba(255,255,255,.5);
-  margin-bottom: 2rem;
-  position: relative;
-  z-index: 1;
-}
-.cta-actions {
+.cta-inner p { font-size: .96rem; color: var(--fg2); max-width: 480px; margin: 0 auto .6rem; line-height: 1.75; position: relative; }
+.cta-inner .cta-sub { font-size: .82rem; color: var(--fg3); margin-bottom: 2rem; position: relative; }
+.cta-btns {
   display: flex;
   flex-wrap: wrap;
-  gap: .8rem;
+  gap: .75rem;
   justify-content: center;
   position: relative;
-  z-index: 1;
 }
 .btn-cta {
   display: inline-flex;
@@ -701,94 +667,88 @@ section { padding-block: 4.5rem; }
   gap: .5rem;
   background: var(--accent);
   color: #fff;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
-  padding: 1rem 2.4rem;
-  border-radius: 3rem;
-  transition: background .18s, transform .12s;
+  padding: .95rem 2.4rem;
+  border-radius: 2rem;
+  border: none;
+  cursor: pointer;
+  transition: background .15s, transform .12s;
+  box-shadow: 0 4px 18px rgba(37,99,235,.35);
 }
-.btn-cta:hover { background: #a84520; transform: translateY(-2px); }
-.btn-cta-alt {
+.btn-cta:hover { background: #1d4ed8; transform: translateY(-2px); }
+.btn-cta-ghost {
   display: inline-flex;
   align-items: center;
   gap: .5rem;
   background: transparent;
-  color: rgba(255,255,255,.8);
+  color: var(--fg2);
   font-size: 1rem;
-  font-weight: 500;
-  padding: 1rem 2rem;
-  border-radius: 3rem;
-  border: 1px solid rgba(255,255,255,.25);
-  transition: border-color .18s;
+  font-weight: 600;
+  padding: .95rem 2rem;
+  border-radius: 2rem;
+  border: 1.5px solid var(--border);
+  transition: border-color .15s;
 }
-.btn-cta-alt:hover { border-color: rgba(255,255,255,.5); color: #fff; }
+.btn-cta-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
-/* ─── Modal ─────────────────────────────────────────────────── */
+/* ─── MODAL ────────────────────────────────────────────── */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.55);
-  backdrop-filter: blur(4px);
+  background: rgba(15,23,42,.6);
+  backdrop-filter: blur(6px);
   z-index: 200;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 0;
   opacity: 0;
   pointer-events: none;
   transition: opacity .25s;
 }
-.modal-overlay.open {
-  opacity: 1;
-  pointer-events: all;
-}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
 .modal {
-  background: var(--card-bg);
+  background: #fff;
   width: 100%;
-  max-width: 580px;
+  max-width: 560px;
   max-height: 92dvh;
   border-radius: 20px 20px 0 0;
   overflow-y: auto;
   transform: translateY(40px);
   transition: transform .3s cubic-bezier(.2,.8,.3,1);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-bottom: env(safe-area-inset-bottom,0px);
 }
 @media (min-width: 640px) {
-  .modal-overlay {
-    align-items: center;
-    padding: 1.5rem;
-  }
-  .modal {
-    border-radius: 20px;
-    max-height: 88dvh;
-    transform: translateY(20px) scale(.97);
-  }
+  .modal-overlay { align-items: center; padding: 1.5rem; }
+  .modal { border-radius: 20px; max-height: 88dvh; transform: translateY(20px) scale(.97); }
 }
-.modal-overlay.open .modal {
-  transform: none;
-}
+.modal-overlay.open .modal { transform: none; }
 .modal-head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.8rem 1.8rem 0;
+  padding: 1.8rem 1.8rem 1rem;
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: var(--card-bg);
+  background: #fff;
   z-index: 2;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: .2rem;
 }
-.modal-head h2 {
-  font-family: var(--f-display);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--fg);
-  line-height: 1.35;
+.modal-head-left { display: flex; align-items: center; gap: .7rem; }
+.modal-head-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg,var(--accent),var(--accent2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
 }
-.modal-head p { font-size: .82rem; color: var(--fg2); margin-top: .25rem; }
+.modal-head-text h2 { font-size: 1.1rem; font-weight: 700; color: var(--fg); }
+.modal-head-text p { font-size: .78rem; color: var(--fg2); margin-top: .1rem; }
 .modal-close {
   background: var(--bg2);
   border: none;
@@ -799,22 +759,15 @@ section { padding-block: 4.5rem; }
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  flex-shrink: 0;
   color: var(--fg2);
   font-size: 1rem;
-  margin-top: .1rem;
+  flex-shrink: 0;
 }
 .modal-close:hover { background: var(--border); }
-.modal-body { padding: 1.2rem 1.8rem 2rem; }
+.modal-body { padding: 1.4rem 1.8rem 2rem; }
 .form-row { margin-bottom: 1.2rem; }
-.form-row label {
-  display: block;
-  font-size: .82rem;
-  font-weight: 700;
-  color: var(--fg);
-  margin-bottom: .4rem;
-}
-.form-row label .req { color: var(--accent); margin-left: .15rem; }
+.form-row label { display: block; font-size: .82rem; font-weight: 600; color: var(--fg); margin-bottom: .4rem; }
+.form-row label .req { color: var(--accent); margin-left: .1rem; }
 .form-row input,
 .form-row select,
 .form-row textarea {
@@ -823,7 +776,7 @@ section { padding-block: 4.5rem; }
   border: 1.5px solid var(--border);
   border-radius: 10px;
   padding: .75rem 1rem;
-  font-size: .92rem;
+  font-size: .9rem;
   font-family: var(--f-body);
   color: var(--fg);
   outline: none;
@@ -835,33 +788,15 @@ section { padding-block: 4.5rem; }
 .form-row textarea:focus { border-color: var(--accent); }
 .form-row textarea { resize: vertical; min-height: 80px; }
 .form-row select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   padding-right: 2.5rem;
 }
-.form-row-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 1.2rem;
-}
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
 @media (max-width: 480px) { .form-row-2 { grid-template-columns: 1fr; } }
-.form-check {
-  display: flex;
-  align-items: flex-start;
-  gap: .6rem;
-  margin-bottom: 1.4rem;
-  cursor: pointer;
-}
-.form-check input[type=checkbox] {
-  width: 1.1rem;
-  height: 1.1rem;
-  accent-color: var(--accent);
-  flex-shrink: 0;
-  margin-top: .15rem;
-  cursor: pointer;
-}
+.form-check { display: flex; align-items: flex-start; gap: .6rem; margin-bottom: 1.4rem; cursor: pointer; }
+.form-check input[type=checkbox] { width: 1.1rem; height: 1.1rem; accent-color: var(--accent); flex-shrink: 0; margin-top: .15rem; cursor: pointer; }
 .form-check span { font-size: .82rem; color: var(--fg2); line-height: 1.55; }
 .form-check span strong { color: var(--fg); }
 .btn-submit {
@@ -869,190 +804,180 @@ section { padding-block: 4.5rem; }
   background: var(--accent);
   color: #fff;
   border: none;
-  border-radius: 3rem;
+  border-radius: 2rem;
   padding: .95rem 1rem;
   font-size: 1rem;
   font-weight: 700;
   font-family: var(--f-body);
   cursor: pointer;
-  transition: background .18s, transform .12s;
+  transition: background .15s, transform .12s;
+  box-shadow: 0 4px 16px rgba(37,99,235,.3);
 }
-.btn-submit:hover:not(:disabled) { background: #a84520; transform: translateY(-1px); }
+.btn-submit:hover:not(:disabled) { background: #1d4ed8; transform: translateY(-1px); }
 .btn-submit:disabled { opacity: .55; cursor: not-allowed; }
-.form-msg {
-  text-align: center;
-  padding: 2rem 1rem;
-}
+.form-msg { text-align: center; padding: 2rem 1rem; }
 .form-msg .check-icon {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3.5rem; height: 3.5rem;
   border-radius: 50%;
-  background: #e6f5ee;
+  background: var(--green-soft);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto .9rem;
   font-size: 1.5rem;
 }
-.form-msg h3 { font-size: 1.1rem; font-weight: 700; color: var(--fg); margin-bottom: .5rem; }
+.form-msg h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
 .form-msg p { font-size: .88rem; color: var(--fg2); line-height: 1.7; }
 .form-err {
-  background: #fff2f0;
-  border: 1px solid #ffc9c0;
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
   border-radius: 8px;
   padding: .7rem .9rem;
   font-size: .82rem;
-  color: #c03020;
+  color: #be123c;
   margin-bottom: 1rem;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .form-err { background: #2a1010; border-color: #5a2020; color: #f08070; }
-  :root:not([data-theme="light"]) .form-msg .check-icon { background: #0d2a1a; }
-}
-:root[data-theme="dark"] .form-err { background: #2a1010; border-color: #5a2020; color: #f08070; }
-:root[data-theme="dark"] .form-msg .check-icon { background: #0d2a1a; }
 
-/* ─── Footer ────────────────────────────────────────────────── */
+/* ─── FOOTER ───────────────────────────────────────────── */
 footer {
-  background: #0e1620;
+  background: #0f172a;
   padding-block: 2.5rem;
 }
 .footer-inner {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem 2rem;
-  align-items: flex-start;
   justify-content: space-between;
+  align-items: flex-start;
 }
-.footer-org {
-  font-size: .78rem;
-  color: rgba(255,255,255,.35);
-  line-height: 1.9;
-}
-.footer-org strong { color: rgba(255,255,255,.6); font-weight: 600; }
+.footer-text { font-size: .78rem; color: rgba(255,255,255,.35); line-height: 1.9; }
+.footer-text strong { color: rgba(255,255,255,.6); font-weight: 600; }
 
 @media (max-width: 600px) {
-  .hero { padding-block: 3.5rem 3rem; }
-  .hero h1 { font-size: 2rem; }
-  .module-header { flex-direction: column; }
-  .module-num { flex-direction: row; min-width: unset; padding: 1rem 1.4rem; gap: .6rem; }
-  .module-num .num { font-size: 1.3rem; }
-  .cta-box { padding: 2.5rem 1.5rem; }
+  .hero { padding-block: 3rem 2.5rem; }
+  .hero h1 { font-size: 1.9rem; }
+  .cta-inner { padding: 2.5rem 1.5rem; }
+  .ready-banner { padding: 1.5rem; }
+  section { padding-block: 3.5rem; }
 }
 </style>
 
 <!-- NAV -->
 <nav class="nav">
   <div class="wrap">
-    <div class="nav-brand">
-      전북광역여성새로일하기센터 · 교육콘텐츠연구소 이룸
-      <strong>AI·AX 융합 실무자 양성과정</strong>
+    <div class="nav-logo">
+      <span class="nav-logo-badge">AI·AX</span>
+      <div class="nav-brand-text">
+        융합 실무자 양성과정
+        <span><br>전북광역여성새로일하기센터 · 이룸</span>
+      </div>
     </div>
-    <button onclick="openForm()" class="nav-cta" style="border:none;cursor:pointer;">
-      수강 신청 →
-    </button>
+    <button class="nav-cta" onclick="openForm()" style="border:none;">수강 신청하기 →</button>
   </div>
 </nav>
 
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
-    <div class="hero-eyebrow">
-      <span class="hero-badge hot">모집중</span>
-      <span class="hero-badge free">수강료 전액 무료</span>
-      <span class="hero-badge">고부가가치 직업교육훈련</span>
-      <span class="hero-badge">전북특화과정</span>
-    </div>
-    <h1>AI를 일로 만드는<br><em>실무 중심</em> 7주 과정</h1>
-    <p class="hero-sub">
-      생성형 AI 문서 작성부터 콘텐츠 제작·바이브 코딩·업무 자동화까지,<br>
-      취업·창업 현장에서 바로 쓸 수 있는 결과물을 직접 완성합니다.
-    </p>
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-n">140<span>시수</span></span>
-        <span class="stat-l">총 교육시간</span>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-badges">
+          <span class="badge badge-hot">모집중</span>
+          <span class="badge badge-free">수강료 전액 무료</span>
+          <span class="badge">전북특화과정</span>
+          <span class="badge">고부가가치 직업훈련</span>
+        </div>
+        <h1>AI를 일로 만드는<br><em>실무 중심</em> 7주 과정</h1>
+        <p class="hero-desc">
+          생성형 AI 문서 작성부터 콘텐츠 제작·바이브 코딩·업무 자동화까지,<br>
+          취업·창업 현장에서 바로 쓸 수 있는 결과물을 직접 완성합니다.
+        </p>
+        <div class="hero-btns">
+          <button class="btn-hero" onclick="openForm()" style="border:none;cursor:pointer;">지금 수강 신청하기 →</button>
+          <a href="#modules" class="btn-hero-ghost">커리큘럼 보기</a>
+        </div>
       </div>
-      <div class="stat">
-        <span class="stat-n">35<span>차시</span></span>
-        <span class="stat-l">차시당 4시간</span>
+      <div class="hero-card">
+        <div class="hero-card-title">과정 요약</div>
+        <div class="hero-stats">
+          <div class="hstat">
+            <div class="hstat-n">140<sup>h</sup></div>
+            <div class="hstat-l">총 교육시간</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-n">35</div>
+            <div class="hstat-l">차시 (1차시 4h)</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-n">4</div>
+            <div class="hstat-l">단계별 모듈</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-n">7주</div>
+            <div class="hstat-l">월~금 집중과정</div>
+          </div>
+        </div>
+        <div class="hero-pill-list">
+          <div class="hero-pill"><span class="hero-pill-dot"></span>코딩 경험 없어도 OK</div>
+          <div class="hero-pill"><span class="hero-pill-dot"></span>AI 초보자 환영</div>
+          <div class="hero-pill"><span class="hero-pill-dot"></span>수료 후 취업·창업 연계</div>
+        </div>
       </div>
-      <div class="stat">
-        <span class="stat-n">4<span>모듈</span></span>
-        <span class="stat-l">단계별 커리큘럼</span>
-      </div>
-      <div class="stat">
-        <span class="stat-n">7<span>주</span></span>
-        <span class="stat-l">월~금 집중 과정</span>
-      </div>
-    </div>
-    <div class="hero-actions">
-      <button onclick="openForm()" class="btn-primary" style="border:none;cursor:pointer;">지금 수강 신청하기 →</button>
-      <a href="#modules" class="btn-secondary">커리큘럼 보기</a>
     </div>
   </div>
 </header>
 
-<!-- INTRO STRIP -->
-<div class="intro">
+<!-- FEATURE 4카드 -->
+<div class="features">
   <div class="wrap">
-    <p class="intro-text">
-      <strong>전북광역여성새로일하기센터</strong> 공식 훈련과정 ·
-      <strong>교육콘텐츠연구소 이룸</strong> 운영 ·
-      주 5일(월~금) · 오프라인 + 현장 실습
-    </p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon fi-blue">🎯</div>
+        <h3>실무 문제 해결 중심</h3>
+        <p>지역 기업의 실제 문제를 발견하고 AI로 해결하는 과정을 처음부터 끝까지 수행합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon fi-purple">🏗️</div>
+        <h3>완성 결과물 보장</h3>
+        <p>AI 업무 도우미·홍보 콘텐츠·웹 프로그램·포트폴리오까지 수료 후 바로 활용 가능합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon fi-green">🌏</div>
+        <h3>전북 특화 주제 연계</h3>
+        <p>전북 5대 핵심산업과 지역 콘텐츠를 연계해 실제 지역 수요에서 과제를 발굴합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon fi-orange">🎓</div>
+        <h3>전주대 후속 과정 연계</h3>
+        <p>수료 후 디자인씽킹·리빙랩·AI 심화 등 전주대학교 후속 프로그램 우선 참여 기회를 드립니다.</p>
+      </div>
+    </div>
   </div>
 </div>
-
-<!-- ABOUT -->
-<section class="about">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="label"><span class="accent-line"></span>이 과정은</span>
-      <h2>AI를 도구가 아닌<br>무기로 만드는 과정입니다</h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-card">
-        <div class="about-icon">🎯</div>
-        <h3>실무 문제 해결 중심</h3>
-        <p>지역 기업과 소상공인의 실제 업무 문제를 발견하고, AI로 해결하는 과정을 처음부터 끝까지 직접 수행합니다.</p>
-      </div>
-      <div class="about-card">
-        <div class="about-icon">🏗️</div>
-        <h3>완성 결과물 보장</h3>
-        <p>AI 업무 도우미, 홍보 콘텐츠 세트, 웹 업무 프로그램, 포트폴리오까지 — 수료 후 바로 취업·창업에 활용할 수 있는 산출물을 만듭니다.</p>
-      </div>
-      <div class="about-card">
-        <div class="about-icon">🌏</div>
-        <h3>전북 특화 주제 연계</h3>
-        <p>전북 5대 핵심산업, 관광·문화콘텐츠, 지역 서비스업을 연계해 실제 지역 수요에서 과제를 발굴합니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- WHO -->
 <section class="who">
   <div class="wrap">
-    <div class="section-head">
-      <span class="label"><span class="accent-line"></span>이런 분께 권합니다</span>
-      <h2>AI가 낯설어도, 코딩을<br>모르더라도 괜찮습니다</h2>
+    <div class="sec-head">
+      <span class="sec-label">이런 분께 권합니다</span>
+      <h2>AI가 낯설어도,<br>코딩을 몰라도 괜찮습니다</h2>
+      <p>디지털 실무 역량이 필요한 누구나 지원할 수 있습니다.</p>
     </div>
     <div class="who-grid">
-      <div class="who-item">
-        <div class="who-dot"></div>
+      <div class="who-card">
+        <div class="who-num">1</div>
         <p>디지털 실무 역량을 키워 재취업을 준비하는 경력단절여성</p>
       </div>
-      <div class="who-item">
-        <div class="who-dot"></div>
+      <div class="who-card">
+        <div class="who-num">2</div>
         <p>AI를 업무에 제대로 활용하고 싶은 직장인·소상공인</p>
       </div>
-      <div class="who-item">
-        <div class="who-dot"></div>
+      <div class="who-card">
+        <div class="who-num">3</div>
         <p>AI 콘텐츠 제작·마케팅 역량으로 창업을 준비하는 분</p>
       </div>
-      <div class="who-item">
-        <div class="who-dot"></div>
+      <div class="who-card">
+        <div class="who-num">4</div>
         <p>코딩 없이 업무용 웹 프로그램을 직접 만들어보고 싶은 분</p>
       </div>
     </div>
@@ -1060,123 +985,99 @@ footer {
 </section>
 
 <!-- MODULES -->
-<section class="modules" id="modules">
+<section class="modules-sec" id="modules">
   <div class="wrap">
-    <div class="section-head">
-      <span class="label"><span class="accent-line"></span>4개 모듈 · 35차시</span>
+    <div class="sec-head">
+      <span class="sec-label">4개 모듈 · 35차시</span>
       <h2>단계별로 쌓이는<br>실전 AI 역량</h2>
     </div>
-    <div class="module-list">
+    <div class="mcard-grid">
 
-      <!-- Module 1 -->
-      <div class="module-card m1">
-        <div class="module-header">
-          <div class="module-num">
-            모듈<div class="num">01</div>
-          </div>
-          <div class="module-info">
-            <div class="module-meta">
-              <span class="module-tag">1~5차시</span>
-              <span class="module-hours">20시간</span>
-            </div>
+      <div class="mcard">
+        <div class="mcard-head">
+          <div class="mcard-num-badge mn1">01</div>
+          <div class="mcard-meta">
+            <span class="mcard-tag">1~5차시 · 20시간</span>
             <h3>AI 협업 역량 키우기</h3>
-            <p class="module-desc">AI 시대의 업무를 이해하고, 나의 강점과 성장 방향을 설계합니다. 구글드라이브·노션·GitHub 등 협업 도구로 나만의 업무 공간을 구축합니다.</p>
-            <div class="module-topics">
-              <span class="topic-chip">AI·AX 시대 업무 이해</span>
-              <span class="topic-chip">개인 역량 진단</span>
-              <span class="topic-chip">구글드라이브 협업</span>
-              <span class="topic-chip">노션·GitHub</span>
-              <span class="topic-chip">직업윤리·기업가정신</span>
-            </div>
-            <div class="module-outcome">
-              <strong>결과물:</strong> 개인 성장 로드맵 · 나만의 업무 공간
-            </div>
           </div>
+        </div>
+        <div class="mcard-body">
+          <p class="mcard-desc">AI 시대의 업무를 이해하고 구글드라이브·노션·GitHub 등 협업 도구로 나만의 업무 공간을 구축합니다.</p>
+          <div class="chip-row">
+            <span class="chip">AI·AX 시대 업무 이해</span>
+            <span class="chip">개인 역량 진단</span>
+            <span class="chip">구글드라이브</span>
+            <span class="chip">노션·GitHub</span>
+            <span class="chip">직업윤리·기업가정신</span>
+          </div>
+          <div class="mcard-result"><strong>결과물:</strong> 개인 성장 로드맵 · 업무 공간</div>
         </div>
       </div>
 
-      <!-- Module 2 -->
-      <div class="module-card m2">
-        <div class="module-header">
-          <div class="module-num">
-            모듈<div class="num">02</div>
-          </div>
-          <div class="module-info">
-            <div class="module-meta">
-              <span class="module-tag">6~12차시</span>
-              <span class="module-hours">28시간</span>
-            </div>
+      <div class="mcard">
+        <div class="mcard-head">
+          <div class="mcard-num-badge mn2">02</div>
+          <div class="mcard-meta">
+            <span class="mcard-tag">6~12차시 · 28시간</span>
             <h3>생성형 AI 실무 역량 강화</h3>
-            <p class="module-desc">AI 모델별 활용법과 프롬프트 설계부터 문서·음성 자료 분석, 매출 데이터 시각화, 업무 보고서 작성까지 기업 실무를 직접 수행합니다. 공공데이터로 사업 기회를 발굴하고 나만의 AI 업무 도우미를 제작합니다.</p>
-            <div class="module-topics">
-              <span class="topic-chip">프롬프트 설계</span>
-              <span class="topic-chip">문서·음성 분석</span>
-              <span class="topic-chip">데이터 시각화</span>
-              <span class="topic-chip">AI 업무 도우미 제작</span>
-              <span class="topic-chip">공공데이터 활용</span>
-              <span class="topic-chip">사업 기획서</span>
-            </div>
-            <div class="module-outcome">
-              <strong>결과물:</strong> AI 업무 도우미 · 업무 개선·사업 기획서
-            </div>
           </div>
+        </div>
+        <div class="mcard-body">
+          <p class="mcard-desc">프롬프트 설계부터 문서·음성 분석, 데이터 시각화, 나만의 AI 업무 도우미 제작까지 기업 실무를 직접 수행합니다.</p>
+          <div class="chip-row">
+            <span class="chip">프롬프트 설계</span>
+            <span class="chip">문서·음성 분석</span>
+            <span class="chip">데이터 시각화</span>
+            <span class="chip">AI 업무 도우미</span>
+            <span class="chip">공공데이터 활용</span>
+            <span class="chip">사업 기획서</span>
+          </div>
+          <div class="mcard-result"><strong>결과물:</strong> AI 업무 도우미 · 업무 개선 기획서</div>
         </div>
       </div>
 
-      <!-- Module 3 -->
-      <div class="module-card m3">
-        <div class="module-header">
-          <div class="module-num">
-            모듈<div class="num">03</div>
-          </div>
-          <div class="module-info">
-            <div class="module-meta">
-              <span class="module-tag">13~25차시</span>
-              <span class="module-hours">52시간</span>
-            </div>
+      <div class="mcard">
+        <div class="mcard-head">
+          <div class="mcard-num-badge mn3">03</div>
+          <div class="mcard-meta">
+            <span class="mcard-tag">13~25차시 · 52시간</span>
             <h3>AI 콘텐츠 제작과 바이브 코딩</h3>
-            <p class="module-desc">기업 홍보 콘텐츠·SNS 상세페이지·숏폼 영상을 직접 제작하고, AI와 대화하며 고객·상품 관리 웹 프로그램을 코딩 없이 만들어 배포합니다.</p>
-            <div class="module-topics">
-              <span class="topic-chip">AI 윤리·저작권</span>
-              <span class="topic-chip">브랜드 홍보물</span>
-              <span class="topic-chip">SNS 콘텐츠</span>
-              <span class="topic-chip">숏폼 영상 제작</span>
-              <span class="topic-chip">바이브 코딩 1~5</span>
-              <span class="topic-chip">웹서비스 배포</span>
-            </div>
-            <div class="module-outcome">
-              <strong>결과물:</strong> 홍보 콘텐츠 세트 · 업무 프로그램(웹) 1건
-            </div>
           </div>
+        </div>
+        <div class="mcard-body">
+          <p class="mcard-desc">기업 홍보 콘텐츠·SNS·숏폼 영상을 제작하고, AI와 대화하며 코딩 없이 업무용 웹 프로그램을 만들어 배포합니다.</p>
+          <div class="chip-row">
+            <span class="chip">AI 윤리·저작권</span>
+            <span class="chip">브랜드 홍보물</span>
+            <span class="chip">SNS 콘텐츠</span>
+            <span class="chip">숏폼 영상 제작</span>
+            <span class="chip">바이브 코딩</span>
+            <span class="chip">웹서비스 배포</span>
+          </div>
+          <div class="mcard-result"><strong>결과물:</strong> 홍보 콘텐츠 세트 · 웹 업무 프로그램</div>
         </div>
       </div>
 
-      <!-- Module 4 -->
-      <div class="module-card m4">
-        <div class="module-header">
-          <div class="module-num">
-            모듈<div class="num">04</div>
+      <div class="mcard">
+        <div class="mcard-head">
+          <div class="mcard-num-badge mn4">04</div>
+          <div class="mcard-meta">
+            <span class="mcard-tag">26~35차시 · 40시간</span>
+            <h3>AI 자동화·현장 프로젝트·취창업</h3>
           </div>
-          <div class="module-info">
-            <div class="module-meta">
-              <span class="module-tag">26~35차시</span>
-              <span class="module-hours">40시간</span>
-            </div>
-            <h3>AI 업무 자동화·현장 프로젝트·취창업 설계</h3>
-            <p class="module-desc">반복 업무를 자동화하고 지역 기업 현장에 직접 투입됩니다. 사업계획서 작성, 포트폴리오 완성, AI 모의 면접까지 — 수료 이후를 준비합니다.</p>
-            <div class="module-topics">
-              <span class="topic-chip">업무 자동화 설계</span>
-              <span class="topic-chip">고객 응대 자동화</span>
-              <span class="topic-chip">현장 프로젝트</span>
-              <span class="topic-chip">사업계획서 작성</span>
-              <span class="topic-chip">포트폴리오</span>
-              <span class="topic-chip">AI 모의 면접</span>
-              <span class="topic-chip">데모데이</span>
-            </div>
-            <div class="module-outcome">
-              <strong>결과물:</strong> 현장 과제 결과물 · 사업계획서 · 취업 포트폴리오
-            </div>
+        </div>
+        <div class="mcard-body">
+          <p class="mcard-desc">반복 업무를 자동화하고 지역 기업 현장에 투입됩니다. 사업계획서·포트폴리오·AI 모의 면접으로 수료 후를 준비합니다.</p>
+          <div class="chip-row">
+            <span class="chip">업무 자동화 설계</span>
+            <span class="chip">고객 응대 자동화</span>
+            <span class="chip">현장 프로젝트</span>
+            <span class="chip">사업계획서</span>
+            <span class="chip">포트폴리오</span>
+            <span class="chip">AI 모의 면접</span>
+            <span class="chip">데모데이</span>
           </div>
+          <div class="mcard-result"><strong>결과물:</strong> 현장 과제 · 사업계획서 · 취업 포트폴리오</div>
         </div>
       </div>
 
@@ -1185,30 +1086,31 @@ footer {
 </section>
 
 <!-- OUTCOMES -->
-<section class="outcomes">
+<section class="outcomes-sec">
   <div class="wrap">
-    <div class="section-head">
-      <span class="label"><span class="accent-line"></span>수료 후 달라지는 것</span>
-      <h2 style="color:#fff;">7주 뒤, 손에 쥐게 되는 것들</h2>
+    <div class="sec-head">
+      <span class="sec-label">수료 후 달라지는 것</span>
+      <h2>7주 뒤, 손에 쥐게 되는 것들</h2>
+      <p>과정을 마친 뒤 취업·창업 현장에서 바로 활용할 수 있는 결과물을 갖춥니다.</p>
     </div>
     <div class="outcomes-grid">
-      <div class="outcome-card">
-        <div class="outcome-icon">📊</div>
-        <h3>AI 업무 분석·자동화 결과물</h3>
+      <div class="oc">
+        <div class="oc-icon">📊</div>
+        <h3>AI 업무 분석·자동화</h3>
         <p>반복 업무를 줄이는 자동화 시스템과 AI 기반 업무 분석 리포트를 완성합니다.</p>
       </div>
-      <div class="outcome-card">
-        <div class="outcome-icon">📱</div>
+      <div class="oc">
+        <div class="oc-icon">📱</div>
         <h3>브랜드 콘텐츠 · 웹서비스</h3>
         <p>기업 홍보 콘텐츠 세트와 실제 배포 가능한 웹 업무 프로그램 1건을 직접 만듭니다.</p>
       </div>
-      <div class="outcome-card">
-        <div class="outcome-icon">🏢</div>
+      <div class="oc">
+        <div class="oc-icon">🏢</div>
         <h3>기업 현장 과제 결과물</h3>
         <p>지역 기업의 실제 문제를 진단하고 AI로 해결한 현장 과제를 포트폴리오로 완성합니다.</p>
       </div>
-      <div class="outcome-card">
-        <div class="outcome-icon">🎓</div>
+      <div class="oc">
+        <div class="oc-icon">🎓</div>
         <h3>취업·창업 포트폴리오</h3>
         <p>직무 작품집, 사업계획서, 이력서까지 — 취업·창업 모두에 바로 쓸 수 있는 성과물을 갖춥니다.</p>
       </div>
@@ -1216,84 +1118,85 @@ footer {
   </div>
 </section>
 
-<!-- READY CHECK -->
-<section class="ready-section">
+<!-- READY -->
+<section class="ready-sec">
   <div class="wrap">
-    <div class="section-head">
-      <span class="label"><span class="accent-line"></span>참여 자격</span>
-      <h2>이것만 할 수 있으면<br><em style="font-style:normal;color:var(--accent);">충분합니다</em></h2>
-      <p style="margin-top:.8rem;color:var(--fg2);font-size:1.05rem;">AI 전문 지식? 코딩 실력? 필요 없습니다.<br>아래 항목에 고개가 끄덕여진다면, 지금 바로 시작할 수 있습니다.</p>
+    <div class="ready-banner">
+      <span class="ready-banner-emoji">💡</span>
+      <div class="ready-banner-text">
+        <h3>이것만 할 수 있으면 충분합니다</h3>
+        <p>AI 전문 지식도, 코딩 실력도 필요 없습니다. 아래 항목에 고개가 끄덕여진다면 지금 바로 시작할 수 있습니다.</p>
+      </div>
     </div>
     <div class="ready-grid">
-      <div class="ready-card">
-        <span class="ready-check">✓</span>
+      <div class="rcard">
+        <span class="rcard-check">✓</span>
         <p>스마트폰으로 카카오톡·유튜브를 쓸 수 있다</p>
       </div>
-      <div class="ready-card">
-        <span class="ready-check">✓</span>
+      <div class="rcard">
+        <span class="rcard-check">✓</span>
         <p>인터넷 검색창에 궁금한 걸 입력할 수 있다</p>
       </div>
-      <div class="ready-card">
-        <span class="ready-check">✓</span>
+      <div class="rcard">
+        <span class="rcard-check">✓</span>
         <p>화면에 나오는 글자를 읽고 따라 클릭할 수 있다</p>
       </div>
-      <div class="ready-card">
-        <span class="ready-check">✓</span>
+      <div class="rcard">
+        <span class="rcard-check">✓</span>
         <p>노트북 또는 PC 앞에 앉아 수업을 들을 수 있다</p>
       </div>
-      <div class="ready-card">
-        <span class="ready-check">✓</span>
+      <div class="rcard">
+        <span class="rcard-check">✓</span>
         <p>"AI가 뭔지 몰라도 배워보고 싶다"는 마음이 있다</p>
       </div>
-      <div class="ready-card ready-card--highlight">
-        <span class="ready-check">✓</span>
+      <div class="rcard rcard-highlight">
+        <span class="rcard-check">✓</span>
         <p>이 항목들을 읽으며 "나도 되겠다" 싶었다</p>
       </div>
     </div>
-    <p class="ready-cta-text">모르는 게 당연한 출발점입니다. 강사진이 처음부터 함께합니다.</p>
   </div>
 </section>
 
 <!-- INSTRUCTORS -->
-<section class="instructors">
+<section class="inst-sec">
   <div class="wrap">
-    <div class="section-head">
-      <span class="label"><span class="accent-line"></span>운영 강사진</span>
+    <div class="sec-head">
+      <span class="sec-label">운영 강사진</span>
       <h2>현장 경력 전문가들이<br>직접 가르칩니다</h2>
     </div>
     <div class="inst-grid">
       <div class="inst-card">
-        <div class="inst-avatar">장</div>
+        <div class="inst-av">장</div>
         <h3>장미희</h3>
         <p class="inst-role">교육콘텐츠연구소 이룸 대표<br>주강사 · 44시간</p>
         <p class="inst-qual">전북대 박사 수료 · AI창업지도사 1급 · 정보처리기사</p>
       </div>
       <div class="inst-card">
-        <div class="inst-avatar">송</div>
+        <div class="inst-av">송</div>
         <h3>송경순</h3>
         <p class="inst-role">인아이티 대표<br>주강사 · 28시간</p>
         <p class="inst-qual">전북대 석사 · 직업능력개발훈련교사 · 정보처리기사</p>
       </div>
       <div class="inst-card">
-        <div class="inst-avatar">이</div>
+        <div class="inst-av">이</div>
         <h3>이현미</h3>
         <p class="inst-role">에이스아이티교육연구소 대표<br>주강사 · 24시간</p>
         <p class="inst-qual">전북대 석사 · 직업훈련교사 2급 · 정보처리기사</p>
       </div>
       <div class="inst-card">
-        <div class="inst-avatar">안</div>
+        <div class="inst-av">안</div>
         <h3>안재찬</h3>
         <p class="inst-role">라온컨설팅 대표<br>주강사 · 12시간</p>
         <p class="inst-qual">원광대 박사 수료 · 정보처리기사</p>
       </div>
       <div class="inst-card">
-        <div class="inst-avatar">정</div>
+        <div class="inst-av">정</div>
         <h3>정서연</h3>
         <p class="inst-role">스마트 IT 교육연구소 대표<br>주강사 · 12시간</p>
         <p class="inst-qual">전북대 석사 · 정보처리기사</p>
       </div>
       <div class="inst-card">
-        <div class="inst-avatar">박</div>
+        <div class="inst-av">박</div>
         <h3>박용남</h3>
         <p class="inst-role">㈜애니설리반학교 대표<br>주강사 · 12시간</p>
         <p class="inst-qual">전주대 박사 · 경영지도사 · 기술거래사</p>
@@ -1302,37 +1205,37 @@ footer {
   </div>
 </section>
 
-<!-- FOLLOW-UP -->
-<section class="followup-section">
+<!-- FOLLOWUP -->
+<section class="followup-sec">
   <div class="wrap">
-    <div class="section-head">
-      <span class="label"><span class="accent-line"></span>수료 후 지원</span>
+    <div class="sec-head">
+      <span class="sec-label">수료 후 지원</span>
       <h2>끝이 아닌, 시작입니다</h2>
-      <p style="margin-top:.8rem;color:var(--fg2);font-size:1.05rem;">7주 과정을 마친 뒤에도 전주대학교와 함께<br>더 깊은 성장을 이어갈 수 있습니다.</p>
+      <p>7주 과정을 마친 뒤에도 전주대학교와 함께 더 깊은 성장을 이어갈 수 있습니다.</p>
     </div>
     <div class="followup-grid">
-      <div class="followup-card">
-        <div class="followup-icon">💡</div>
+      <div class="fcard">
+        <div class="fcard-icon">💡</div>
         <h3>디자인씽킹</h3>
         <p>사용자 중심으로 문제를 정의하고 창의적 해법을 도출하는 실전 워크숍</p>
       </div>
-      <div class="followup-card">
-        <div class="followup-icon">🏘️</div>
+      <div class="fcard">
+        <div class="fcard-icon">🏘️</div>
         <h3>리빙랩</h3>
         <p>지역 주민과 함께 지역 문제를 직접 실험하고 해결하는 현장 참여형 프로그램</p>
       </div>
-      <div class="followup-card">
-        <div class="followup-icon">🤝</div>
+      <div class="fcard">
+        <div class="fcard-icon">🤝</div>
         <h3>지역 현장 연계</h3>
         <p>전북 지역 기업·기관과 연계한 실전 프로젝트로 현장 경험을 쌓을 기회 제공</p>
       </div>
-      <div class="followup-card">
-        <div class="followup-icon">🤖</div>
+      <div class="fcard">
+        <div class="fcard-icon">🤖</div>
         <h3>AI 후속 과정</h3>
-        <p>기초를 넘어 심화 AI 활용, 자동화, 서비스 기획까지 단계별 심화 교육 지원</p>
+        <p>심화 AI 활용·자동화·서비스 기획까지 단계별 심화 교육 지원</p>
       </div>
     </div>
-    <div class="followup-badge">
+    <div class="followup-note">
       <span>📍</span>
       <p>후속 프로그램은 <strong>전주대학교</strong>와 협력하여 진행되며, 수료생에게 우선 참여 기회가 주어집니다.</p>
     </div>
@@ -1340,15 +1243,15 @@ footer {
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
+<section class="cta-sec">
   <div class="wrap">
-    <div class="cta-box">
+    <div class="cta-inner">
       <h2>AI로 일을 바꾸는<br>첫 번째 7주를 시작하세요</h2>
       <p>코딩 경험이 없어도 됩니다. AI를 활용해 실제 결과물을 만드는 과정을 함께합니다.</p>
-      <p class="cta-contact">문의: 전북광역여성새로일하기센터 · 교육콘텐츠연구소 이룸</p>
-      <div class="cta-actions">
-        <button onclick="openForm()" class="btn-cta" style="border:none;cursor:pointer;">수강 신청하기 →</button>
-        <a href="#modules" class="btn-cta-alt">커리큘럼 다시 보기</a>
+      <p class="cta-sub">문의: 전북광역여성새로일하기센터 · 교육콘텐츠연구소 이룸</p>
+      <div class="cta-btns">
+        <button class="btn-cta" onclick="openForm()" style="border:none;cursor:pointer;">수강 신청하기 →</button>
+        <a href="#modules" class="btn-cta-ghost">커리큘럼 다시 보기</a>
       </div>
     </div>
   </div>
@@ -1358,9 +1261,12 @@ footer {
 <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal" id="modalBox">
     <div class="modal-head">
-      <div>
-        <h2 id="modalTitle">AI·AX 융합 실무자 양성과정<br>수강 신청</h2>
-        <p>전북광역여성새로일하기센터 · 교육콘텐츠연구소 이룸</p>
+      <div class="modal-head-left">
+        <div class="modal-head-icon">📋</div>
+        <div class="modal-head-text">
+          <h2 id="modalTitle">AI·AX 양성과정 수강 신청</h2>
+          <p>전북광역여성새로일하기센터 · 교육콘텐츠연구소 이룸</p>
+        </div>
       </div>
       <button class="modal-close" onclick="closeForm()" aria-label="닫기">✕</button>
     </div>
@@ -1447,7 +1353,6 @@ footer {
 </div>
 
 <script>
-// ── Modal open/close ──────────────────────────────────────────
 function openForm() {
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1464,7 +1369,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeForm();
 });
 
-// ── 신청지역 → 거주지역 연동 ──────────────────────────────────
 const REGION_OPTIONS = {
   '전북': ['전주시','완주군','군산시','익산시','정읍시','남원시','김제시','장수군','임실군','순창군','고창군','부안군','전북 외 지역'],
   '전주': ['전주시','완주군','익산시','기타 전북'],
@@ -1487,7 +1391,6 @@ function applyRegionChange() {
   }
 }
 
-// ── DB + MCP capability (Claude 아티팩트 환경에서만 작동) ──────
 let db = null, mcpNs = null;
 (async () => {
   if (typeof claude !== 'undefined') {
@@ -1496,7 +1399,6 @@ let db = null, mcpNs = null;
   }
 })();
 
-// ── Submit ────────────────────────────────────────────────────
 async function submitForm() {
   const btn = document.getElementById('submitBtn');
   const errEl = document.getElementById('formErr');
@@ -1524,10 +1426,7 @@ async function submitForm() {
   btn.disabled = true;
   btn.textContent = '제출 중...';
 
-  const data = {
-    name, phone, email, applyRegion, region, status, aiexp, motive,
-    submittedAt: new Date().toISOString()
-  };
+  const data = { name, phone, email, applyRegion, region, status, aiexp, motive, submittedAt: new Date().toISOString() };
 
   const TONG_ID = '1njrllsGf8TDvxGhYKDzDake4SlqfB080J8vyS3pegaA';
   const REGIONAL_IDS = {
@@ -1543,36 +1442,28 @@ async function submitForm() {
     if (db) {
       const id = 'r_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
       await db.doc('registrations/' + id).set(data);
-      try {
-        const snap = await db.collection('registrations').get();
-        no = snap.docs.length;
-      } catch(ex) {}
+      try { const snap = await db.collection('registrations').get(); no = snap.docs.length; } catch(ex) {}
     }
 
-    // 구글 시트 실시간 연동
     const now = new Date();
     const pad = n => String(n).padStart(2,'0');
     const dateStr = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate())
       + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
 
     if (mcpNs) {
-      // Claude 아티팩트 환경: MCP 직접 연동
       try {
         await mcpNs.callTool('Google Sheets', 'append_values', {
-          spreadsheetId: TONG_ID,
-          range: '전체!A:J',
+          spreadsheetId: TONG_ID, range: '전체!A:J',
           values: [[no, dateStr, name, phone, email, applyRegion, region, status, aiexp, motive||'']]
         });
         if (applyRegion && REGIONAL_IDS[applyRegion]) {
           await mcpNs.callTool('Google Sheets', 'append_values', {
-            spreadsheetId: REGIONAL_IDS[applyRegion],
-            range: '시트1!A:I',
+            spreadsheetId: REGIONAL_IDS[applyRegion], range: '시트1!A:I',
             values: [[no, dateStr, name, phone, email, region, status, aiexp, motive||'']]
           });
         }
       } catch(ex) {}
     } else {
-      // 외부 호스팅(Vercel 등): Apps Script fetch 연동
       const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytA01jgqhmOGlUG7b75TgXNa6Ci0VK5hWwcU6_ZxvnaDeT01REgle1C61C4WqHsjKKgA/exec';
       try {
         await fetch(APPS_SCRIPT_URL, {
@@ -1619,12 +1510,12 @@ function showErr(msg) {
 <footer>
   <div class="wrap">
     <div class="footer-inner">
-      <div class="footer-org">
+      <div class="footer-text">
         <strong>전북광역여성새로일하기센터 · 교육콘텐츠연구소 이룸</strong><br>
         AI·AX 융합 실무자 양성과정 · 35차시 · 총 140시수<br>
         주 5차시(월~금) · 1차시 4시간 · 7주 과정
       </div>
-      <div class="footer-org" style="text-align:right;">
+      <div class="footer-text" style="text-align:right;">
         2026. 10. 작성<br>
         ※ 교육 일정은 내부 사정으로 변경될 수 있습니다.
       </div>
