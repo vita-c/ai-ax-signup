@@ -172,6 +172,7 @@ body::before {
   color: rgba(255,255,255,.75);
 }
 .hero-badge.hot { background: rgba(192,86,42,.35); border-color: rgba(192,86,42,.5); color: #f0b090; }
+.hero-badge.free { background: rgba(34,139,34,.3); border-color: rgba(34,139,34,.5); color: #7edb7e; font-weight: 700; }
 .hero h1 {
   font-family: var(--f-display);
   font-size: clamp(2.2rem, 5vw, 3.6rem);
@@ -545,6 +546,101 @@ section { padding-block: 4.5rem; }
   line-height: 1.5;
 }
 
+/* ─── Ready section ─────────────────────────────────────────── */
+.ready-section { background: var(--bg2); }
+.ready-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.ready-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  font-size: 1rem;
+  color: var(--fg);
+  transition: box-shadow .2s;
+}
+.ready-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+.ready-card--highlight {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.ready-check {
+  flex-shrink: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .85rem;
+  font-weight: 700;
+}
+.ready-cta-text {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--fg2);
+  font-size: 1rem;
+}
+
+/* ─── Follow-up section ─────────────────────────────────────── */
+.followup-section { background: var(--ink); }
+.followup-section .section-head h2 { color: #fff; }
+.followup-section .label { color: var(--gold); }
+.followup-section .accent-line { background: var(--gold); }
+.followup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+.followup-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  padding: 1.6rem 1.4rem;
+  transition: background .2s;
+}
+.followup-card:hover { background: rgba(255,255,255,.1); }
+.followup-icon {
+  font-size: 2rem;
+  margin-bottom: .8rem;
+}
+.followup-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: .5rem;
+}
+.followup-card p {
+  font-size: .92rem;
+  color: rgba(255,255,255,.65);
+  line-height: 1.6;
+}
+.followup-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 2.2rem;
+  background: rgba(181,146,42,.15);
+  border: 1px solid rgba(181,146,42,.35);
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  color: rgba(255,255,255,.85);
+  font-size: .95rem;
+  line-height: 1.6;
+}
+.followup-badge span { font-size: 1.4rem; flex-shrink: 0; }
+.followup-badge strong { color: var(--gold); }
+
 /* ─── CTA ───────────────────────────────────────────────────── */
 .cta-section {
   background: var(--bg);
@@ -863,6 +959,7 @@ footer {
   <div class="wrap">
     <div class="hero-eyebrow">
       <span class="hero-badge hot">모집중</span>
+      <span class="hero-badge free">수강료 전액 무료</span>
       <span class="hero-badge">고부가가치 직업교육훈련</span>
       <span class="hero-badge">전북특화과정</span>
     </div>
@@ -1119,6 +1216,44 @@ footer {
   </div>
 </section>
 
+<!-- READY CHECK -->
+<section class="ready-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label"><span class="accent-line"></span>참여 자격</span>
+      <h2>이것만 할 수 있으면<br><em style="font-style:normal;color:var(--accent);">충분합니다</em></h2>
+      <p style="margin-top:.8rem;color:var(--fg2);font-size:1.05rem;">AI 전문 지식? 코딩 실력? 필요 없습니다.<br>아래 항목에 고개가 끄덕여진다면, 지금 바로 시작할 수 있습니다.</p>
+    </div>
+    <div class="ready-grid">
+      <div class="ready-card">
+        <span class="ready-check">✓</span>
+        <p>스마트폰으로 카카오톡·유튜브를 쓸 수 있다</p>
+      </div>
+      <div class="ready-card">
+        <span class="ready-check">✓</span>
+        <p>인터넷 검색창에 궁금한 걸 입력할 수 있다</p>
+      </div>
+      <div class="ready-card">
+        <span class="ready-check">✓</span>
+        <p>화면에 나오는 글자를 읽고 따라 클릭할 수 있다</p>
+      </div>
+      <div class="ready-card">
+        <span class="ready-check">✓</span>
+        <p>노트북 또는 PC 앞에 앉아 수업을 들을 수 있다</p>
+      </div>
+      <div class="ready-card">
+        <span class="ready-check">✓</span>
+        <p>"AI가 뭔지 몰라도 배워보고 싶다"는 마음이 있다</p>
+      </div>
+      <div class="ready-card ready-card--highlight">
+        <span class="ready-check">✓</span>
+        <p>이 항목들을 읽으며 "나도 되겠다" 싶었다</p>
+      </div>
+    </div>
+    <p class="ready-cta-text">모르는 게 당연한 출발점입니다. 강사진이 처음부터 함께합니다.</p>
+  </div>
+</section>
+
 <!-- INSTRUCTORS -->
 <section class="instructors">
   <div class="wrap">
@@ -1163,6 +1298,43 @@ footer {
         <p class="inst-role">㈜애니설리반학교 대표<br>주강사 · 12시간</p>
         <p class="inst-qual">전주대 박사 · 경영지도사 · 기술거래사</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOLLOW-UP -->
+<section class="followup-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label"><span class="accent-line"></span>수료 후 지원</span>
+      <h2>끝이 아닌, 시작입니다</h2>
+      <p style="margin-top:.8rem;color:var(--fg2);font-size:1.05rem;">7주 과정을 마친 뒤에도 전주대학교와 함께<br>더 깊은 성장을 이어갈 수 있습니다.</p>
+    </div>
+    <div class="followup-grid">
+      <div class="followup-card">
+        <div class="followup-icon">💡</div>
+        <h3>디자인씽킹</h3>
+        <p>사용자 중심으로 문제를 정의하고 창의적 해법을 도출하는 실전 워크숍</p>
+      </div>
+      <div class="followup-card">
+        <div class="followup-icon">🏘️</div>
+        <h3>리빙랩</h3>
+        <p>지역 주민과 함께 지역 문제를 직접 실험하고 해결하는 현장 참여형 프로그램</p>
+      </div>
+      <div class="followup-card">
+        <div class="followup-icon">🤝</div>
+        <h3>지역 현장 연계</h3>
+        <p>전북 지역 기업·기관과 연계한 실전 프로젝트로 현장 경험을 쌓을 기회 제공</p>
+      </div>
+      <div class="followup-card">
+        <div class="followup-icon">🤖</div>
+        <h3>AI 후속 과정</h3>
+        <p>기초를 넘어 심화 AI 활용, 자동화, 서비스 기획까지 단계별 심화 교육 지원</p>
+      </div>
+    </div>
+    <div class="followup-badge">
+      <span>📍</span>
+      <p>후속 프로그램은 <strong>전주대학교</strong>와 협력하여 진행되며, 수료생에게 우선 참여 기회가 주어집니다.</p>
     </div>
   </div>
 </section>
