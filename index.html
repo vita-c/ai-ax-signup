@@ -887,12 +887,47 @@ footer {
 .footer-text { font-size: .78rem; color: rgba(255,255,255,.35); line-height: 1.9; }
 .footer-text strong { color: rgba(255,255,255,.6); font-weight: 600; }
 
+/* ─── 태블릿 (768px 이하) ──────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-cta { font-size: .82rem; padding: .55rem 1rem; }
+  .sec-head h2 { font-size: clamp(1.5rem,5vw,2.2rem); }
+  .hero-course-title { font-size: 1.2rem; }
+  .hero h1 { font-size: clamp(1.8rem,5.5vw,2.6rem); }
+  .outcomes-grid { grid-template-columns: repeat(2,1fr); }
+  .inst-grid { grid-template-columns: repeat(2,1fr); }
+  .followup-sec .sec-head h2 { font-size: clamp(1.9rem,5vw,3rem); }
+  .followup-uni { font-size: 1.25rem; }
+  .followup-grid { grid-template-columns: repeat(2,1fr); }
+  .footer-inner { flex-direction: column; gap: .8rem; text-align: center; }
+  .footer-text:last-child { text-align: center !important; }
+}
+
+/* ─── 모바일 (600px 이하) ──────────────────────────────── */
 @media (max-width: 600px) {
   .hero { padding-block: 3rem 2.5rem; }
-  .hero h1 { font-size: 1.9rem; }
+  .hero h1 { font-size: 1.75rem; }
+  .hero-desc { font-size: .88rem; }
+  .hero-course-title { font-size: 1.05rem; }
   .cta-inner { padding: 2.5rem 1.5rem; }
-  .ready-banner { padding: 1.5rem; }
-  section { padding-block: 3.5rem; }
+  .ready-banner { padding: 1.5rem; flex-direction: column; align-items: flex-start; gap: .8rem; }
+  .ready-banner-emoji { font-size: 2rem; }
+  section { padding-block: 3rem; }
+  .outcomes-sec { padding-block: 3rem; }
+  .followup-sec { padding-block: 3rem; }
+  .followup-sec .sec-head h2 { font-size: clamp(1.6rem,7vw,2.4rem); }
+  .followup-uni { font-size: 1.1rem; }
+  .followup-sec .sec-head p { font-size: 1rem; }
+  .outcomes-grid { grid-template-columns: 1fr; }
+  .inst-grid { grid-template-columns: 1fr; }
+  .followup-grid { grid-template-columns: 1fr; }
+  .feat-grid { grid-template-columns: 1fr !important; }
+  .ready-grid { grid-template-columns: 1fr; }
+  .mcard-grid { grid-template-columns: 1fr !important; }
+  .nav-brand-text { font-size: .88rem; }
+  .nav-brand-text span { font-size: .78rem; }
+  .nav-logo-badge { font-size: .78rem; padding: .28rem .55rem; }
+  .sec-head h2 { font-size: clamp(1.4rem,6.5vw,2rem); }
+  .hero-stat-num { font-size: 1.5rem; }
 }
 </style>
 
